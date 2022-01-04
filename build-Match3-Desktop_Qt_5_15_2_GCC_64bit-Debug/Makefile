@@ -748,6 +748,7 @@ compiler_rcc_clean:
 qrc_qml.cpp: ../Match3/qml.qrc \
 		../../Qt/5.15.2/gcc_64/bin/rcc \
 		../Match3/Table.qml \
+		../Match3/TileModel.qml \
 		../Match3/GameOver.qml \
 		../Match3/ButtonRestart.qml \
 		../Match3/main.qml

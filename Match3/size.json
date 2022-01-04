@@ -1,0 +1,12 @@
+{
+    "colors":[
+        "black",
+        "green",
+        "blue",
+        "white",
+        "red",
+        "orange"
+    ],
+    "columns": 5,
+    "rows": 5
+}
