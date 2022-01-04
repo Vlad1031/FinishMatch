@@ -4,7 +4,8 @@ QT += qml quick
 CONFIG += plugin c++11
 
 TARGET = $$qtLibraryTarget($$TARGET)
-uri = Match
+uri = Match3model
+DESTDIR = $$OUT_PWD/$$uri
 
 # Input
 SOURCES += \
@@ -32,3 +33,7 @@ unix {
     target.path = $$installPath
     INSTALLS += target qmldir
 }
+
+cpqmldir.files = qmldir
+cpqmldir.path = $$DESTDIR
+COPIES += cpqmldir

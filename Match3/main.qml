@@ -1,6 +1,7 @@
 import QtQuick 2.15
 import QtQuick.Window 2.15
 import QtQuick.Controls 2.4
+import Match3model 1.0
 
 ApplicationWindow{
     id: root

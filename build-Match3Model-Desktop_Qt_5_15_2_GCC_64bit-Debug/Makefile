@@ -273,7 +273,7 @@ DIST          = ../Match3Model/qmldir \
 		../Match3Model/match3model.h ../Match3Model/match3model_plugin.cpp \
 		../Match3Model/match3model.cpp
 QMAKE_TARGET  = Match3Model
-DESTDIR       = 
+DESTDIR       = Match3model/
 TARGET        = libMatch3Model.so
 TARGETD       = libMatch3Model.so
 
@@ -281,9 +281,11 @@ TARGETD       = libMatch3Model.so
 first: all
 ####### Build rules
 
-libMatch3Model.so: /home/vskotselias/Match3/build-Match3Model-Desktop_Qt_5_15_2_GCC_64bit-Debug/qmldir $(OBJECTS) $(SUBLIBS) $(OBJCOMP)  
+Match3model/libMatch3Model.so: /home/vskotselias/Match3/build-Match3Model-Desktop_Qt_5_15_2_GCC_64bit-Debug/qmldir Match3model/qmldir $(OBJECTS) $(SUBLIBS) $(OBJCOMP)  
+	@test -d Match3model/ || mkdir -p Match3model/
 	-$(DEL_FILE) $(TARGET)
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(LIBS) $(OBJCOMP)
+	-$(MOVE) $(TARGET) Match3model/$(TARGET)
 
 
 
@@ -714,7 +716,7 @@ qmake: FORCE
 qmake_all: FORCE
 
 
-all: Makefile libMatch3Model.so
+all: Makefile Match3model/libMatch3Model.so
 
 dist: distdir FORCE
 	(cd `dirname $(DISTDIR)` && $(TAR) $(DISTNAME).tar $(DISTNAME) && $(COMPRESS) $(DISTNAME).tar) && $(MOVE) `dirname $(DISTDIR)`/$(DISTNAME).tar.gz . && $(DEL_FILE) -r $(DISTDIR)
@@ -725,6 +727,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents ../../Qt/5.15.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Match3Model/match3model_plugin.h ../Match3Model/match3model.h $(DISTDIR)/
 	$(COPY_FILE) --parents ../Match3Model/match3model_plugin.cpp ../Match3Model/match3model.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Match3Model/qmldir $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -733,7 +736,7 @@ clean: compiler_clean
 
 
 distclean: clean 
-	-$(DEL_FILE) $(TARGET) 
+	-$(DEL_FILE) Match3model/$(TARGET) 
 	-$(DEL_FILE) .qmake.stash
 	-$(DEL_FILE) Makefile
 
@@ -851,10 +854,10 @@ moc_match3model_plugin.cpp: ../Match3Model/match3model_plugin.h \
 	/home/vskotselias/Qt/5.15.2/gcc_64/bin/moc $(DEFINES) --include /home/vskotselias/Match3/build-Match3Model-Desktop_Qt_5_15_2_GCC_64bit-Debug/moc_predefs.h -I/home/vskotselias/Qt/5.15.2/gcc_64/mkspecs/linux-g++ -I/home/vskotselias/Match3/Match3Model -I/home/vskotselias/Qt/5.15.2/gcc_64/include -I/home/vskotselias/Qt/5.15.2/gcc_64/include/QtQuick -I/home/vskotselias/Qt/5.15.2/gcc_64/include/QtGui -I/home/vskotselias/Qt/5.15.2/gcc_64/include/QtQmlModels -I/home/vskotselias/Qt/5.15.2/gcc_64/include/QtQml -I/home/vskotselias/Qt/5.15.2/gcc_64/include/QtNetwork -I/home/vskotselias/Qt/5.15.2/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Match3Model/match3model_plugin.h -o moc_match3model_plugin.cpp
 
 moc_match3model.cpp: ../Match3Model/match3model.h \
-		../../Qt/5.15.2/gcc_64/include/QtQuick/QQuickItem \
-		../../Qt/5.15.2/gcc_64/include/QtQuick/qquickitem.h \
-		../../Qt/5.15.2/gcc_64/include/QtQuick/qtquickglobal.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qtqmlglobal.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/QAbstractListModel \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qvariant.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qatomic.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qglobal.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qconfig-bootstrapped.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qconfig.h \
@@ -866,42 +869,29 @@ moc_match3model.cpp: ../Match3Model/match3model.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qsysinfo.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qlogging.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qflags.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qatomic.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qglobalstatic.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qmutex.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qnumeric.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qversiontagging.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qbasicatomic.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qatomic_bootstrap.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qgenericatomic.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qatomic_cxx11.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qatomic_msvc.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qglobalstatic.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qmutex.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qnumeric.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qversiontagging.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qtqml-config.h \
-		../../Qt/5.15.2/gcc_64/include/QtNetwork/qtnetworkglobal.h \
-		../../Qt/5.15.2/gcc_64/include/QtNetwork/qtnetwork-config.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qtguiglobal.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qtgui-config.h \
-		../../Qt/5.15.2/gcc_64/include/QtQuick/qtquick-config.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qqml.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qqmlprivate.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qqmlparserstatus.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qobject.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qobjectdefs.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qnamespace.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qstring.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qchar.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qbytearray.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qrefcount.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qnamespace.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qarraydata.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qstringliteral.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qstringalgorithms.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qstringview.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qstringbuilder.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qlist.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qalgorithms.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qiterator.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qhashfunctions.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qstring.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qchar.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qstringliteral.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qstringview.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qstringbuilder.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qpair.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qvector.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qcontainertools_impl.h \
@@ -910,55 +900,27 @@ moc_match3model.cpp: ../Match3Model/match3model.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qstringlist.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qregexp.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qstringmatcher.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qcoreevent.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qscopedpointer.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qmetatype.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qcontainerfwd.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qobject_impl.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qqmllist.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qvariant.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qobjectdefs.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qmap.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qdebug.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qhash.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qtextstream.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qiodevice.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qobject.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qcoreevent.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qscopedpointer.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qobject_impl.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qlocale.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qshareddata.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qset.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qcontiguouscache.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qsharedpointer.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qqmlpropertyvaluesource.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qurl.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qurlquery.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qpointer.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qmetaobject.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qqmlcomponent.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qqmlerror.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qjsvalue.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/QObject \
 		../../Qt/5.15.2/gcc_64/include/QtCore/QList \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qevent.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qwindowdefs.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qwindowdefs_win.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qregion.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qrect.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qmargins.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qsize.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qdatastream.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qkeysequence.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qfile.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qfiledevice.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qvector2d.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qtouchdevice.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qfont.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qaccessible.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qcoreapplication.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qeventloop.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qcolor.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qrgb.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qrgba64.h \
 		moc_predefs.h \
 		../../Qt/5.15.2/gcc_64/bin/moc
 	/home/vskotselias/Qt/5.15.2/gcc_64/bin/moc $(DEFINES) --include /home/vskotselias/Match3/build-Match3Model-Desktop_Qt_5_15_2_GCC_64bit-Debug/moc_predefs.h -I/home/vskotselias/Qt/5.15.2/gcc_64/mkspecs/linux-g++ -I/home/vskotselias/Match3/Match3Model -I/home/vskotselias/Qt/5.15.2/gcc_64/include -I/home/vskotselias/Qt/5.15.2/gcc_64/include/QtQuick -I/home/vskotselias/Qt/5.15.2/gcc_64/include/QtGui -I/home/vskotselias/Qt/5.15.2/gcc_64/include/QtQmlModels -I/home/vskotselias/Qt/5.15.2/gcc_64/include/QtQml -I/home/vskotselias/Qt/5.15.2/gcc_64/include/QtNetwork -I/home/vskotselias/Qt/5.15.2/gcc_64/include/QtCore -I. -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include ../Match3Model/match3model.h -o moc_match3model.cpp
@@ -967,6 +929,10 @@ compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
+compiler_copy_cpqmldir_make_all: Match3model/qmldir
+Match3model/qmldir: ../Match3Model/qmldir
+	$(QINSTALL) ../Match3Model/qmldir Match3model/qmldir
+
 compiler_yacc_decl_make_all:
 compiler_yacc_decl_clean:
 compiler_yacc_impl_make_all:
@@ -1062,50 +1028,22 @@ match3model_plugin.o: ../Match3Model/match3model_plugin.cpp ../Match3Model/match
 		../../Qt/5.15.2/gcc_64/include/QtNetwork/qtnetworkglobal.h \
 		../../Qt/5.15.2/gcc_64/include/QtNetwork/qtnetwork-config.h \
 		../Match3Model/match3model.h \
-		../../Qt/5.15.2/gcc_64/include/QtQuick/QQuickItem \
-		../../Qt/5.15.2/gcc_64/include/QtQuick/qquickitem.h \
-		../../Qt/5.15.2/gcc_64/include/QtQuick/qtquickglobal.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qtguiglobal.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qtgui-config.h \
-		../../Qt/5.15.2/gcc_64/include/QtQuick/qtquick-config.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/QAbstractListModel \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/QList \
 		../../Qt/5.15.2/gcc_64/include/QtQml/qqml.h \
 		../../Qt/5.15.2/gcc_64/include/QtQml/qqmlprivate.h \
 		../../Qt/5.15.2/gcc_64/include/QtQml/qqmlparserstatus.h \
 		../../Qt/5.15.2/gcc_64/include/QtQml/qqmllist.h \
 		../../Qt/5.15.2/gcc_64/include/QtQml/qqmlpropertyvaluesource.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qmetaobject.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qqmlcomponent.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qqmlerror.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qjsvalue.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/QObject \
-		../../Qt/5.15.2/gcc_64/include/QtCore/QList \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qevent.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qwindowdefs.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qwindowdefs_win.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qregion.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qrect.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qmargins.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qsize.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qdatastream.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qkeysequence.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qfile.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qfiledevice.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qvector2d.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qtouchdevice.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qfont.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qaccessible.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qcoreapplication.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qeventloop.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qcolor.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qrgb.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qrgba64.h
+		../../Qt/5.15.2/gcc_64/include/QtCore/qmetaobject.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o match3model_plugin.o ../Match3Model/match3model_plugin.cpp
 
 match3model.o: ../Match3Model/match3model.cpp ../Match3Model/match3model.h \
-		../../Qt/5.15.2/gcc_64/include/QtQuick/QQuickItem \
-		../../Qt/5.15.2/gcc_64/include/QtQuick/qquickitem.h \
-		../../Qt/5.15.2/gcc_64/include/QtQuick/qtquickglobal.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qtqmlglobal.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/QAbstractListModel \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qabstractitemmodel.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qvariant.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qatomic.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qglobal.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qconfig-bootstrapped.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qconfig.h \
@@ -1117,42 +1055,29 @@ match3model.o: ../Match3Model/match3model.cpp ../Match3Model/match3model.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qsysinfo.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qlogging.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qflags.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qatomic.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qglobalstatic.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qmutex.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qnumeric.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qversiontagging.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qbasicatomic.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qatomic_bootstrap.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qgenericatomic.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qatomic_cxx11.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qatomic_msvc.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qglobalstatic.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qmutex.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qnumeric.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qversiontagging.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qtqml-config.h \
-		../../Qt/5.15.2/gcc_64/include/QtNetwork/qtnetworkglobal.h \
-		../../Qt/5.15.2/gcc_64/include/QtNetwork/qtnetwork-config.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qtguiglobal.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qtgui-config.h \
-		../../Qt/5.15.2/gcc_64/include/QtQuick/qtquick-config.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qqml.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qqmlprivate.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qqmlparserstatus.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qobject.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qobjectdefs.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qnamespace.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qstring.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qchar.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qbytearray.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qrefcount.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qnamespace.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qarraydata.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qstringliteral.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qstringalgorithms.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qstringview.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qstringbuilder.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qlist.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qalgorithms.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qiterator.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qhashfunctions.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qstring.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qchar.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qstringliteral.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qstringalgorithms.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qstringview.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qstringbuilder.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qpair.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qvector.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qcontainertools_impl.h \
@@ -1161,55 +1086,27 @@ match3model.o: ../Match3Model/match3model.cpp ../Match3Model/match3model.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qstringlist.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qregexp.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qstringmatcher.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qcoreevent.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qscopedpointer.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qmetatype.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qcontainerfwd.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qobject_impl.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qqmllist.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qvariant.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qobjectdefs.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qmap.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qdebug.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qhash.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qtextstream.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qiodevice.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qobject.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qcoreevent.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qscopedpointer.h \
+		../../Qt/5.15.2/gcc_64/include/QtCore/qobject_impl.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qlocale.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qshareddata.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qset.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qcontiguouscache.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qsharedpointer.h \
 		../../Qt/5.15.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qqmlpropertyvaluesource.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qurl.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qurlquery.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qpointer.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qmetaobject.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qqmlcomponent.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qqmlerror.h \
-		../../Qt/5.15.2/gcc_64/include/QtQml/qjsvalue.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/QObject \
-		../../Qt/5.15.2/gcc_64/include/QtCore/QList \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qevent.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qwindowdefs.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qwindowdefs_win.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qregion.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qrect.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qmargins.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qsize.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qdatastream.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qkeysequence.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qfile.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qfiledevice.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qvector2d.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qtouchdevice.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qfont.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qaccessible.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qcoreapplication.h \
-		../../Qt/5.15.2/gcc_64/include/QtCore/qeventloop.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qcolor.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qrgb.h \
-		../../Qt/5.15.2/gcc_64/include/QtGui/qrgba64.h
+		../../Qt/5.15.2/gcc_64/include/QtCore/QList
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o match3model.o ../Match3Model/match3model.cpp
 
 moc_match3model_plugin.o: moc_match3model_plugin.cpp 
@@ -1221,21 +1118,21 @@ moc_match3model.o: moc_match3model.cpp
 ####### Install
 
 install_target: first FORCE
-	@test -d $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match || mkdir -p $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match
-	$(QINSTALL_PROGRAM) $(TARGET) $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match/$(TARGET)
+	@test -d $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match3model || mkdir -p $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match3model
+	$(QINSTALL_PROGRAM) Match3model/$(TARGET) $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match3model/$(TARGET)
 
 uninstall_target: FORCE
-	-$(DEL_FILE) $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match/$(TARGET)
-	-$(DEL_DIR) $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match/ 
+	-$(DEL_FILE) $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match3model/$(TARGET)
+	-$(DEL_DIR) $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match3model/ 
 
 
 install_qmldir: first FORCE
-	@test -d $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match || mkdir -p $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match
-	$(QINSTALL) /home/vskotselias/Match3/Match3Model/qmldir $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match/qmldir
+	@test -d $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match3model || mkdir -p $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match3model
+	$(QINSTALL) /home/vskotselias/Match3/Match3Model/qmldir $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match3model/qmldir
 
 uninstall_qmldir: FORCE
-	-$(DEL_FILE) -r $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match/qmldir
-	-$(DEL_DIR) $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match/ 
+	-$(DEL_FILE) -r $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match3model/qmldir
+	-$(DEL_DIR) $(INSTALL_ROOT)/home/vskotselias/Qt/5.15.2/gcc_64/qml/Match3model/ 
 
 
 install: install_target install_qmldir  FORCE

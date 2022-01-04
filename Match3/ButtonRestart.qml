@@ -11,7 +11,7 @@ Button{
         implicitWidth: 90
         implicitHeight: 40
         color: "#ffff00"
-        radius: 10
+        radius: 5
         Text{
             anchors.centerIn: rect_but
             text: "Restart"

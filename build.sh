@@ -12,7 +12,7 @@ cd $my_build
 echo $PATH $my_qmake ../Match3Model
 make
 
-echo $PATH $my_qmake ../main
+echo $PATH $my_qmake ../Match3
 make
 
-./main
+./Match3

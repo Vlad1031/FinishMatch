@@ -1,9 +1,12 @@
 import QtQuick 2.15
+import Match3model 1.0
 
 GridView{
     id: root
     interactive: false
-    model: 15
+    model: Match3model{
+        id: match3model
+    }
 
     Rectangle {
         id: rect

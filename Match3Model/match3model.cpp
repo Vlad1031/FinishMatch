@@ -1,15 +1,31 @@
 #include "match3model.h"
 
-Match3Model::Match3Model(QQuickItem *parent)
-    : QQuickItem(parent)
+Match3model::Match3model(QObject *parent) : QAbstractListModel(parent)
 {
-    // By default, QQuickItem does not draw anything. If you subclass
-    // QQuickItem to create a visual item, you will need to uncomment the
-    // following line and re-implement updatePaintNode()
-
-    // setFlag(ItemHasContents, true);
+    for(int i = 1; i <= 16; i++){
+        m_board.push_back(i);
+    }
 }
 
-Match3Model::~Match3Model()
+Match3model::~Match3model()
 {
+}
+
+int Match3model::rowCount(const QModelIndex &parent) const
+{
+    Q_UNUSED(parent);
+    return m_board.count();
+}
+
+QVariant Match3model::data(const QModelIndex &index, int role) const
+{
+    if(index.row() < 0 || index.row() > m_board.count()){
+        return QVariant();
+    }
+
+    switch (role) {
+        case Qt::DisplayRole:
+        return m_board.value(index.row());
+    }
+    return QVariant();
 }

@@ -32,11 +32,12 @@ Popup{
         id: button_restart
 
         background: Rectangle{
+            x: 180
             id: rect_restart
             implicitWidth: 90
             implicitHeight: 40
             color: "#ffff00"
-            radius: 10
+            radius: 5
             Text{
                 anchors.centerIn: rect_restart
                 text: "Restart"
@@ -56,7 +57,7 @@ Popup{
             implicitWidth: 90
             implicitHeight: 40
             color: "#ffff00"
-            radius: 10
+            radius: 5
             Text{
                 anchors.centerIn: rect_close
                 text: "Close"
