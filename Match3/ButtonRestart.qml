@@ -15,7 +15,7 @@ Button{
         Text{
             anchors.centerIn: rect_but
             text: "Restart"
-            font.pointSize: Math.min(rect.width, rect.height) / 2
+            font.pointSize: Math.min(width, height) / 1.5
             font.bold: true
         }
     }

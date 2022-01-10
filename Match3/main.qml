@@ -29,7 +29,7 @@ ApplicationWindow{
         y: 10
         onPressed: {
             rectColor = "#FF0000"
-            win.open()
+            gameOver.open()
         }
         onReleased: { rectColor = "#ffff00" }
     }
@@ -53,6 +53,6 @@ ApplicationWindow{
     }
 
     GameOver{
-        id: win
+        id: gameOver
     }
 }

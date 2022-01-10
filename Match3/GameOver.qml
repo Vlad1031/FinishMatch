@@ -41,7 +41,7 @@ Popup{
             Text{
                 anchors.centerIn: rect_restart
                 text: "Restart"
-                font.pointSize: Math.min(rect.width, rect.height) / 2
+                font.pointSize: 10
                 font.bold: true
             }
         }
@@ -61,7 +61,7 @@ Popup{
             Text{
                 anchors.centerIn: rect_close
                 text: "Close"
-                font.pointSize: Math.min(rect.width, rect.height) / 2
+                font.pointSize: 10
                 font.bold: true
             }
         }

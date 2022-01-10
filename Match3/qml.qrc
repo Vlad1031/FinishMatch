@@ -4,7 +4,6 @@
         <file>ButtonRestart.qml</file>
         <file>Table.qml</file>
         <file>GameOver.qml</file>
-        <file>TileModel.qml</file>
         <file>size.json</file>
     </qresource>
 </RCC>
