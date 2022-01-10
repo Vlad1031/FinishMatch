@@ -49,7 +49,6 @@ Match3model::Match3model(QObject *parent) : QAbstractListModel(parent)
         for(int j = 0; j < rows.toInt(); j++){
             m_board.push_back(j);
         }
-        m_board.push_back(i);
     }
 }
 

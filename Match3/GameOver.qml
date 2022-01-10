@@ -68,6 +68,7 @@ Popup{
         anchors.right: parent.right
         anchors.bottom: parent.bottom
     }
+
     MouseArea{
         anchors.fill: button_close
         onClicked: Qt.quit()

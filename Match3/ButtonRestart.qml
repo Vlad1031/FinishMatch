@@ -19,5 +19,6 @@ Button{
             font.bold: true
         }
     }
+    y: 10
     anchors.horizontalCenter: parent.horizontalCenter
 }

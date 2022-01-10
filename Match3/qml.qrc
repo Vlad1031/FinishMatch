@@ -5,5 +5,6 @@
         <file>Table.qml</file>
         <file>GameOver.qml</file>
         <file>size.json</file>
+        <file>Sphere.qml</file>
     </qresource>
 </RCC>

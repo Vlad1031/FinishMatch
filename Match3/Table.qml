@@ -11,16 +11,12 @@ GridView{
 
     delegate: Item{
         id: backgroundDelegate
-        Rectangle {
-            id: rect
-            width: cellWidth; height: cellHeight
-            radius: 50
-            anchors.margins: 3
+        width: root.cellWidth; height: root.cellHeight
 
-            gradient: Gradient {
-                GradientStop { position: 0.0; color: "lightsteelblue" }
-                GradientStop { position: 1.0; color: "blue" }
-            }
+        Sphere{
+            anchors.fill: backgroundDelegate
+            anchors.margins: 3
+            width: cellWidth; height: cellHeight
         }
     }
 

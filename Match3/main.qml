@@ -22,34 +22,16 @@ ApplicationWindow{
         Table{
             anchors.fill: parent
             anchors.margins: 5
+            clip: true
         }
     }
 
     ButtonRestart{
-        y: 10
         onPressed: {
             rectColor = "#FF0000"
             gameOver.open()
         }
         onReleased: { rectColor = "#ffff00" }
-    }
-
-    Label{
-        id: label_move
-        y: 10
-        text: "move"
-        color: "#000000"
-        anchors.margins: 100
-        anchors.left: parent.left
-    }
-
-    Label{
-        id: label_score
-        y: 10
-        text: "score"
-        color: "#000000"
-        anchors.margins: 100
-        anchors.right: parent.right
     }
 
     GameOver{
