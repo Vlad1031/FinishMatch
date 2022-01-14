@@ -20,6 +20,7 @@ ApplicationWindow{
         visible: true
 
         Table{
+            id: table
             anchors.fill: parent
             anchors.margins: 5
             clip: true
@@ -32,6 +33,40 @@ ApplicationWindow{
             gameOver.open()
         }
         onReleased: { rectColor = "#ffff00" }
+    }
+
+    Label{
+        id: label_move
+        y: 10
+        text: "move"
+        color: "#000000"
+        anchors.margins: 100
+        anchors.left: parent.left
+
+        Label{
+            y: 20
+            text: table.countMove
+            color: "#000000"
+            anchors.margins: 15
+            anchors.left: parent.left
+        }
+    }
+
+    Label{
+        id: label_score
+        y: 10
+        text: "score"
+        color: "#000000"
+        anchors.margins: 100
+        anchors.right: parent.right
+
+        Label{
+            y: 20
+            text: table.countScore
+            color: "#000000"
+            anchors.margins: 15
+            anchors.left: parent.left
+        }
     }
 
     GameOver{

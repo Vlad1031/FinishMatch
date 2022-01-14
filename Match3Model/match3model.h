@@ -8,6 +8,7 @@
 #include <QVariant>
 #include <QFile>
 #include <QByteArray>
+using namespace std;
 
 class Match3model : public QAbstractListModel
 {
@@ -20,6 +21,17 @@ public:
 
     virtual int rowCount(const QModelIndex &parent) const override;
     virtual QVariant data(const QModelIndex &index, int role) const override;
+
+    Q_INVOKABLE bool neighboring(int from, int to);
+    Q_INVOKABLE bool move(int from);
+
+    Q_INVOKABLE void boardMix();
+    Q_INVOKABLE bool gameOver();
+    Q_INVOKABLE void removeSphere();
+
+    Q_INVOKABLE int myRows();
+    Q_INVOKABLE int myColumns();
+    Q_INVOKABLE void myColors();
 
 private:
     QList <int> m_board;
