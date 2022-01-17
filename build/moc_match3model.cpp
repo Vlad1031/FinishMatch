@@ -67,17 +67,17 @@ static const uint qt_meta_data_Match3model[] = {
 
  // methods: name, argc, parameters, tag, flags
        1,    2,   54,    2, 0x02 /* Public */,
-       5,    1,   59,    2, 0x02 /* Public */,
-       6,    0,   62,    2, 0x02 /* Public */,
-       7,    0,   63,    2, 0x02 /* Public */,
-       8,    0,   64,    2, 0x02 /* Public */,
-       9,    0,   65,    2, 0x02 /* Public */,
-      10,    0,   66,    2, 0x02 /* Public */,
-      11,    0,   67,    2, 0x02 /* Public */,
+       5,    2,   59,    2, 0x02 /* Public */,
+       6,    0,   64,    2, 0x02 /* Public */,
+       7,    0,   65,    2, 0x02 /* Public */,
+       8,    0,   66,    2, 0x02 /* Public */,
+       9,    0,   67,    2, 0x02 /* Public */,
+      10,    0,   68,    2, 0x02 /* Public */,
+      11,    0,   69,    2, 0x02 /* Public */,
 
  // methods: parameters
     QMetaType::Bool, QMetaType::Int, QMetaType::Int,    3,    4,
-    QMetaType::Bool, QMetaType::Int,    3,
+    QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
     QMetaType::Void,
     QMetaType::Bool,
     QMetaType::Void,
@@ -96,8 +96,7 @@ void Match3model::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         switch (_id) {
         case 0: { bool _r = _t->neighboring((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 1: { bool _r = _t->move((*reinterpret_cast< int(*)>(_a[1])));
-            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
+        case 1: _t->move((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 2: _t->boardMix(); break;
         case 3: { bool _r = _t->gameOver();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;

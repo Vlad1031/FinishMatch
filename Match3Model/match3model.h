@@ -3,6 +3,7 @@
 
 #include <QAbstractListModel>
 #include <QList>
+#include <QVector>
 
 #include <QString>
 #include <QVariant>
@@ -23,7 +24,7 @@ public:
     virtual QVariant data(const QModelIndex &index, int role) const override;
 
     Q_INVOKABLE bool neighboring(int from, int to);
-    Q_INVOKABLE bool move(int from);
+    Q_INVOKABLE void move(int from, int to);
 
     Q_INVOKABLE void boardMix();
     Q_INVOKABLE bool gameOver();
@@ -35,6 +36,8 @@ public:
 
 private:
     QList <int> m_board;
+//    QList <string> arrColors;
+
 };
 
 #endif // MATCH3MODEL_H

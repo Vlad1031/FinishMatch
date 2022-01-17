@@ -14,7 +14,7 @@ Match3model::Match3model(QObject *parent) : QAbstractListModel(parent)
             m_board.push_back(j);
         }
     }
-//    myColors();
+    myColors();
 }
 
 Match3model::~Match3model() { }
@@ -78,9 +78,11 @@ void Match3model::myColors(){
     QJsonObject jObject = jDocument.object();
 
     QJsonArray colors = jObject.value("colors").toArray();
-    foreach(QJsonValue allColors, colors){
-        qDebug() << allColors.toString();
-    }
+    qDebug() << colors;
+
+//    foreach(QJsonValue allColors, colors){
+//        qDebug() << allColors.toString();
+//    }
 }
 
 bool Match3model::neighboring(int from, int to){
@@ -95,8 +97,7 @@ bool Match3model::neighboring(int from, int to){
     return false;
 }
 
-bool Match3model::move(int from){
-    int to = 8;
+void Match3model::move(int from, int to){
     if(neighboring(from, to)){
         m_board.move(from, to);
         if(from > to){
@@ -118,10 +119,6 @@ bool Match3model::move(int from){
             }
             m_board.move(to - 1, from);
         }
-        return true;
-        }
-    else {
-        return false;
     }
 }
 
