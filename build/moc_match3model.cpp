@@ -23,7 +23,7 @@ QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Match3model_t {
     QByteArrayData data[12];
-    char stringdata0[95];
+    char stringdata0[97];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,17 +38,17 @@ QT_MOC_LITERAL(2, 24, 0), // ""
 QT_MOC_LITERAL(3, 25, 4), // "from"
 QT_MOC_LITERAL(4, 30, 2), // "to"
 QT_MOC_LITERAL(5, 33, 4), // "move"
-QT_MOC_LITERAL(6, 38, 8), // "boardMix"
-QT_MOC_LITERAL(7, 47, 8), // "gameOver"
-QT_MOC_LITERAL(8, 56, 12), // "removeSphere"
-QT_MOC_LITERAL(9, 69, 6), // "myRows"
-QT_MOC_LITERAL(10, 76, 9), // "myColumns"
-QT_MOC_LITERAL(11, 86, 8) // "myColors"
+QT_MOC_LITERAL(6, 38, 10), // "boardValid"
+QT_MOC_LITERAL(7, 49, 8), // "gameOver"
+QT_MOC_LITERAL(8, 58, 12), // "removeSphere"
+QT_MOC_LITERAL(9, 71, 6), // "myRows"
+QT_MOC_LITERAL(10, 78, 9), // "myColumns"
+QT_MOC_LITERAL(11, 88, 8) // "myColors"
 
     },
     "Match3model\0neighboring\0\0from\0to\0move\0"
-    "boardMix\0gameOver\0removeSphere\0myRows\0"
-    "myColumns\0myColors"
+    "boardValid\0gameOver\0removeSphere\0"
+    "myRows\0myColumns\0myColors"
 };
 #undef QT_MOC_LITERAL
 
@@ -83,7 +83,7 @@ static const uint qt_meta_data_Match3model[] = {
     QMetaType::Void,
     QMetaType::Int,
     QMetaType::Int,
-    QMetaType::Void,
+    QMetaType::QVariantList,
 
        0        // eod
 };
@@ -97,7 +97,7 @@ void Match3model::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 0: { bool _r = _t->neighboring((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 1: _t->move((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 2: _t->boardMix(); break;
+        case 2: _t->boardValid(); break;
         case 3: { bool _r = _t->gameOver();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 4: _t->removeSphere(); break;
@@ -105,7 +105,8 @@ void Match3model::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 6: { int _r = _t->myColumns();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 7: _t->myColors(); break;
+        case 7: { QList<QVariant> _r = _t->myColors();
+            if (_a[0]) *reinterpret_cast< QList<QVariant>*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     }

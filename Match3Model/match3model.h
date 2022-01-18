@@ -3,7 +3,6 @@
 
 #include <QAbstractListModel>
 #include <QList>
-#include <QVector>
 
 #include <QString>
 #include <QVariant>
@@ -26,18 +25,16 @@ public:
     Q_INVOKABLE bool neighboring(int from, int to);
     Q_INVOKABLE void move(int from, int to);
 
-    Q_INVOKABLE void boardMix();
+    Q_INVOKABLE void boardValid();
     Q_INVOKABLE bool gameOver();
     Q_INVOKABLE void removeSphere();
 
     Q_INVOKABLE int myRows();
     Q_INVOKABLE int myColumns();
-    Q_INVOKABLE void myColors();
+    Q_INVOKABLE QList<QVariant> myColors();
 
 private:
     QList <int> m_board;
-//    QList <string> arrColors;
-
 };
 
 #endif // MATCH3MODEL_H

@@ -10,6 +10,9 @@ GridView{
     property int countMove: 0
     property int countScore: 0
     property int index_to: 0
+    property var arrColors: root.model.myColors()
+
+    onArrColorsChanged: console.log(arrColors)
 
     model: Match3model{
         id: match3model
@@ -33,7 +36,8 @@ GridView{
             anchors.margins: 3
             width: cellWidth; height: cellHeight
             radius: 50
-            color: root.model.myColors()
+
+            color: arrColors[Math.floor(Math.random() * arrColors.length)]
         }
 
         state: "from"
@@ -41,10 +45,6 @@ GridView{
             State{
                 name: "to"
                 PropertyChanges { target: spheres; scale: 0.8 }
-            },
-            State {
-                name: "standart"
-                PropertyChanges { target: spheres; scale: 1 }
             }
         ]
 
@@ -60,7 +60,7 @@ GridView{
                 if(root.state == "from"){
                     if(root.model.move(index, index_to)){
                         countMove++
-                        parent.state = (parent.state === "standart" ? "from" : "standart")
+                        parent.state = (parent.state === "from" ? "from" : "from")
                         console.log("count move =", countMove)
                     }
                 }
@@ -79,3 +79,4 @@ GridView{
         }
     }
 }
+

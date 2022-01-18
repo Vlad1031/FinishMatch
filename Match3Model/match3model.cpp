@@ -14,7 +14,7 @@ Match3model::Match3model(QObject *parent) : QAbstractListModel(parent)
             m_board.push_back(j);
         }
     }
-    myColors();
+//    myColors();
 }
 
 Match3model::~Match3model() { }
@@ -61,7 +61,7 @@ int Match3model::myColumns(){
     return columns.toInt();
 }
 
-void Match3model::myColors(){
+QList<QVariant> Match3model::myColors(){
     QFile file;
     file.setFileName(":size.json");
     if(!file.open(QIODevice::ReadOnly)){
@@ -78,11 +78,7 @@ void Match3model::myColors(){
     QJsonObject jObject = jDocument.object();
 
     QJsonArray colors = jObject.value("colors").toArray();
-    qDebug() << colors;
-
-//    foreach(QJsonValue allColors, colors){
-//        qDebug() << allColors.toString();
-//    }
+    return colors.toVariantList();
 }
 
 bool Match3model::neighboring(int from, int to){
@@ -122,7 +118,7 @@ void Match3model::move(int from, int to){
     }
 }
 
-//void Match3model::boardMix(){
+//void Match3model::boardValid(){
 
 //}
 
@@ -132,9 +128,9 @@ void Match3model::move(int from, int to){
 //    return m_gameOver;
 //}
 
-//void Match3model::removeSphere(){
+void Match3model::removeSphere(){
 
-//}
+}
 
 int Match3model::rowCount(const QModelIndex &parent) const
 {
