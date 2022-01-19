@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Match3model_t {
-    QByteArrayData data[12];
-    char stringdata0[97];
+    QByteArrayData data[13];
+    char stringdata0[111];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -41,14 +41,15 @@ QT_MOC_LITERAL(5, 33, 4), // "move"
 QT_MOC_LITERAL(6, 38, 10), // "boardValid"
 QT_MOC_LITERAL(7, 49, 8), // "gameOver"
 QT_MOC_LITERAL(8, 58, 12), // "removeSphere"
-QT_MOC_LITERAL(9, 71, 6), // "myRows"
-QT_MOC_LITERAL(10, 78, 9), // "myColumns"
-QT_MOC_LITERAL(11, 88, 8) // "myColors"
+QT_MOC_LITERAL(9, 71, 13), // "colorDelegate"
+QT_MOC_LITERAL(10, 85, 6), // "myRows"
+QT_MOC_LITERAL(11, 92, 9), // "myColumns"
+QT_MOC_LITERAL(12, 102, 8) // "myColors"
 
     },
     "Match3model\0neighboring\0\0from\0to\0move\0"
     "boardValid\0gameOver\0removeSphere\0"
-    "myRows\0myColumns\0myColors"
+    "colorDelegate\0myRows\0myColumns\0myColors"
 };
 #undef QT_MOC_LITERAL
 
@@ -70,17 +71,17 @@ static const uint qt_meta_data_Match3model[] = {
        5,    2,   59,    2, 0x02 /* Public */,
        6,    0,   64,    2, 0x02 /* Public */,
        7,    0,   65,    2, 0x02 /* Public */,
-       8,    0,   66,    2, 0x02 /* Public */,
-       9,    0,   67,    2, 0x02 /* Public */,
-      10,    0,   68,    2, 0x02 /* Public */,
-      11,    0,   69,    2, 0x02 /* Public */,
+       8,    1,   66,    2, 0x02 /* Public */,
+      10,    0,   69,    2, 0x02 /* Public */,
+      11,    0,   70,    2, 0x02 /* Public */,
+      12,    0,   71,    2, 0x02 /* Public */,
 
  // methods: parameters
     QMetaType::Bool, QMetaType::Int, QMetaType::Int,    3,    4,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
     QMetaType::Void,
     QMetaType::Bool,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::Char,    9,
     QMetaType::Int,
     QMetaType::Int,
     QMetaType::QVariantList,
@@ -100,7 +101,7 @@ void Match3model::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 2: _t->boardValid(); break;
         case 3: { bool _r = _t->gameOver();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 4: _t->removeSphere(); break;
+        case 4: _t->removeSphere((*reinterpret_cast< char(*)>(_a[1]))); break;
         case 5: { int _r = _t->myRows();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 6: { int _r = _t->myColumns();

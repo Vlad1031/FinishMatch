@@ -27,7 +27,7 @@ public:
 
     Q_INVOKABLE void boardValid();
     Q_INVOKABLE bool gameOver();
-    Q_INVOKABLE void removeSphere();
+    Q_INVOKABLE void removeSphere(char colorDelegate);
 
     Q_INVOKABLE int myRows();
     Q_INVOKABLE int myColumns();

@@ -7,10 +7,11 @@ GridView{
     cellWidth: width / root.model.myColumns()
     cellHeight: height / root.model.myRows()
 
-    property int countMove: 0
-    property int countScore: 0
+//    property int countMove: 0
+//    property int countScore: 0
     property int index_to: 0
     property var arrColors: root.model.myColors()
+    property variant nameColor: value
 
     onArrColorsChanged: console.log(arrColors)
 
@@ -36,7 +37,6 @@ GridView{
             anchors.margins: 3
             width: cellWidth; height: cellHeight
             radius: 50
-
             color: arrColors[Math.floor(Math.random() * arrColors.length)]
         }
 
@@ -54,17 +54,22 @@ GridView{
                 root.state = (root.state === "from" ? "to" : "from")
                 parent.state = (parent.state === "from" ? "to" : "from")
 
+                console.log("Index:", index, ";", "Color:", spheres.color)
+
                 if(root.state == "to"){
                     index_to = index
+                    nameColor = spheres.color
                 }
+
                 if(root.state == "from"){
-                    if(root.model.move(index, index_to)){
-                        countMove++
-                        parent.state = (parent.state === "from" ? "from" : "from")
-                        console.log("count move =", countMove)
-                    }
+                    root.model.move(index, index_to)
+                    if(nameColor == spheres.color)
+                        root.model.removeSphere(nameColor)
+//                    if(nameColor == spheres.color){
+//                        root.model.move(index, index_to)
+//                    }
                 }
-            }
+            }            
         }
     }
 
@@ -79,4 +84,30 @@ GridView{
         }
     }
 }
+
+
+//MouseArea{
+//    anchors.fill: parent
+//    onClicked: {
+//        root.state = (root.state === "from" ? "to" : "from")
+//        parent.state = (parent.state === "from" ? "to" : "from")
+
+////                console.log("Index:", index, ",", "Color:", spheres.color)
+
+//        if(root.state == "to"){
+//            index_to = index
+//            nameColor = spheres.color
+//        }
+
+//        if(root.state == "from"){
+//            if(nameColor == spheres.color){
+//                if(root.model.move(index, index_to)){
+//                    countMove++
+//                    parent.state = (parent.state === "from" ? "from" : "from")
+//                    console.log("count move =", countMove)
+//                }
+//            }
+//        }
+//    }
+//}
 

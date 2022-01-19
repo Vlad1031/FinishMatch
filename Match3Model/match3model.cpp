@@ -14,7 +14,6 @@ Match3model::Match3model(QObject *parent) : QAbstractListModel(parent)
             m_board.push_back(j);
         }
     }
-//    myColors();
 }
 
 Match3model::~Match3model() { }
@@ -128,8 +127,13 @@ void Match3model::move(int from, int to){
 //    return m_gameOver;
 //}
 
-void Match3model::removeSphere(){
-
+void Match3model::removeSphere(char colorDelegate){
+    for(int i = 0; i < myColumns(); i++){
+        if(myColumns() >= 3){
+            beginRemoveRows(QModelIndex(), colorDelegate, colorDelegate);
+            endRemoveRows();
+        }
+    }
 }
 
 int Match3model::rowCount(const QModelIndex &parent) const
