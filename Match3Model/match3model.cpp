@@ -9,10 +9,13 @@
 
 Match3model::Match3model(QObject *parent) : QAbstractListModel(parent)
 {
-    for(int i = 0; i < myColumns(); i++){
-        for(int j = 0; j < myRows(); j++){
-            m_board.push_back(j);
-        }
+    m_roleNames[ColorRole] = "color";
+
+    for(int i = 0; i < myColumns() * myRows(); i++){
+        mBoard mb;
+        mb.m_index = i;
+        mb.m_color = QColor(myColors()[rand() % myColors().size()]);
+        m_board.append(mb);
     }
 }
 
@@ -59,8 +62,7 @@ int Match3model::myColumns(){
 
     return columns.toInt();
 }
-
-QList<QVariant> Match3model::myColors(){
+QList<QString> Match3model::myColors(){
     QFile file;
     file.setFileName(":size.json");
     if(!file.open(QIODevice::ReadOnly)){
@@ -77,7 +79,12 @@ QList<QVariant> Match3model::myColors(){
     QJsonObject jObject = jDocument.object();
 
     QJsonArray colors = jObject.value("colors").toArray();
-    return colors.toVariantList();
+    QList<QString> myColor;
+
+    foreach(QJsonValue allColors, colors){
+        myColor.append(allColors.toString());
+    }
+    return myColor;
 }
 
 bool Match3model::neighboring(int from, int to){
@@ -127,13 +134,13 @@ void Match3model::move(int from, int to){
 //    return m_gameOver;
 //}
 
-void Match3model::removeSphere(char colorDelegate){
-    for(int i = 0; i < myColumns(); i++){
-        if(myColumns() >= 3){
-            beginRemoveRows(QModelIndex(), colorDelegate, colorDelegate);
-            endRemoveRows();
-        }
+void Match3model::remove(int index){
+    if(index < 0 || index >= m_board.count()){
+        return;
     }
+    beginRemoveRows(QModelIndex(), index, index);
+    m_board.removeAt(index);
+    endRemoveRows();
 }
 
 int Match3model::rowCount(const QModelIndex &parent) const
@@ -149,8 +156,12 @@ QVariant Match3model::data(const QModelIndex &index, int role) const
     }
 
     switch (role) {
-        case Qt::DisplayRole:
-        return m_board.value(index.row());
+        case ColorRole:
+        return m_board.value(index.row()).m_color;
     }
     return QVariant();
+}
+
+QHash<int, QByteArray> Match3model::roleNames() const{
+    return m_roleNames;
 }

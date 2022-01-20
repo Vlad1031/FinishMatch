@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Match3model_t {
-    QByteArrayData data[13];
-    char stringdata0[111];
+    QByteArrayData data[14];
+    char stringdata0[112];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -40,16 +40,17 @@ QT_MOC_LITERAL(4, 30, 2), // "to"
 QT_MOC_LITERAL(5, 33, 4), // "move"
 QT_MOC_LITERAL(6, 38, 10), // "boardValid"
 QT_MOC_LITERAL(7, 49, 8), // "gameOver"
-QT_MOC_LITERAL(8, 58, 12), // "removeSphere"
-QT_MOC_LITERAL(9, 71, 13), // "colorDelegate"
-QT_MOC_LITERAL(10, 85, 6), // "myRows"
-QT_MOC_LITERAL(11, 92, 9), // "myColumns"
-QT_MOC_LITERAL(12, 102, 8) // "myColors"
+QT_MOC_LITERAL(8, 58, 6), // "remove"
+QT_MOC_LITERAL(9, 65, 5), // "index"
+QT_MOC_LITERAL(10, 71, 6), // "myRows"
+QT_MOC_LITERAL(11, 78, 9), // "myColumns"
+QT_MOC_LITERAL(12, 88, 8), // "myColors"
+QT_MOC_LITERAL(13, 97, 14) // "QList<QString>"
 
     },
     "Match3model\0neighboring\0\0from\0to\0move\0"
-    "boardValid\0gameOver\0removeSphere\0"
-    "colorDelegate\0myRows\0myColumns\0myColors"
+    "boardValid\0gameOver\0remove\0index\0"
+    "myRows\0myColumns\0myColors\0QList<QString>"
 };
 #undef QT_MOC_LITERAL
 
@@ -81,10 +82,10 @@ static const uint qt_meta_data_Match3model[] = {
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
     QMetaType::Void,
     QMetaType::Bool,
-    QMetaType::Void, QMetaType::Char,    9,
+    QMetaType::Void, QMetaType::Int,    9,
     QMetaType::Int,
     QMetaType::Int,
-    QMetaType::QVariantList,
+    0x80000000 | 13,
 
        0        // eod
 };
@@ -101,13 +102,13 @@ void Match3model::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 2: _t->boardValid(); break;
         case 3: { bool _r = _t->gameOver();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 4: _t->removeSphere((*reinterpret_cast< char(*)>(_a[1]))); break;
+        case 4: _t->remove((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 5: { int _r = _t->myRows();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 6: { int _r = _t->myColumns();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 7: { QList<QVariant> _r = _t->myColors();
-            if (_a[0]) *reinterpret_cast< QList<QVariant>*>(_a[0]) = std::move(_r); }  break;
+        case 7: { QList<QString> _r = _t->myColors();
+            if (_a[0]) *reinterpret_cast< QList<QString>*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
     }
