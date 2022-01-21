@@ -135,18 +135,28 @@ void Match3model::move(int from, int to){
 //}
 
 bool Match3model::combinations(){
-//    for(int i = 0; i < m_board.size(); i++){
-//        if(m_board.value(i).m_color == m_board.value(i + 1).m_color){
-//            return true;
-//        }
-//    }
+    for(int i = 0; i < m_board.size(); i++){
+        if(m_board.value(i).m_color == m_board.value(i + 1).m_color){
+            if(m_board.value(i).m_color == m_board.value(i + 2).m_color){
+                return true;
+            }
+        }
+    }
     return false;
 }
 
-bool Match3model::remove(){
+bool Match3model::remove(int from, int to){
 
+    if(combinations() == false){
+        return "hhh";
+    }
+    beginRemoveRows(QModelIndex(), from, to);
+    for(int i = from; i < to; i++){
+        m_board.removeAt(i);
+    }
+    endRemoveRows();
 
-    return false;
+    return true;
 }
 
 int Match3model::rowCount(const QModelIndex &parent) const

@@ -34,7 +34,7 @@ public:
 //    Q_INVOKABLE void boardValid();
 //    Q_INVOKABLE bool gameOver();
 
-    Q_INVOKABLE bool remove();
+    Q_INVOKABLE bool remove(int from, int to);
     Q_INVOKABLE bool combinations();
 
     Q_INVOKABLE int myRows();
