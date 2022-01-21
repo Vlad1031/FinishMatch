@@ -134,13 +134,19 @@ void Match3model::move(int from, int to){
 //    return m_gameOver;
 //}
 
-void Match3model::remove(int index){
-    if(index < 0 || index >= m_board.count()){
-        return;
-    }
-    beginRemoveRows(QModelIndex(), index, index);
-    m_board.removeAt(index);
-    endRemoveRows();
+bool Match3model::combinations(){
+//    for(int i = 0; i < m_board.size(); i++){
+//        if(m_board.value(i).m_color == m_board.value(i + 1).m_color){
+//            return true;
+//        }
+//    }
+    return false;
+}
+
+bool Match3model::remove(){
+
+
+    return false;
 }
 
 int Match3model::rowCount(const QModelIndex &parent) const
@@ -156,7 +162,7 @@ QVariant Match3model::data(const QModelIndex &index, int role) const
     }
 
     switch (role) {
-        case ColorRole:
+    case ColorRole:
         return m_board.value(index.row()).m_color;
     }
     return QVariant();

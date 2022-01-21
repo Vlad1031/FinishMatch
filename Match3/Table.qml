@@ -60,8 +60,8 @@ GridView{
 
                 if(root.state == "from"){
                     root.model.move(index, index_to)
-                    if(nameColor != spheres.color)
-                        root.model.remove(index)
+//                    if(nameColor != spheres.color)
+//                        root.model.remove(index)
                 }
             }            
         }

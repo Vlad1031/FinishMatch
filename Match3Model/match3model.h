@@ -18,7 +18,7 @@ class Match3model : public QAbstractListModel
 public:
 
     enum roleNames{
-        ColorRole = Qt::UserRole
+        ColorRole = Qt::UserRole,
     };
     virtual QHash<int, QByteArray> roleNames() const override;
 
@@ -31,9 +31,11 @@ public:
     Q_INVOKABLE bool neighboring(int from, int to);
     Q_INVOKABLE void move(int from, int to);
 
-    Q_INVOKABLE void boardValid();
-    Q_INVOKABLE bool gameOver();
-    Q_INVOKABLE void remove(int index);
+//    Q_INVOKABLE void boardValid();
+//    Q_INVOKABLE bool gameOver();
+
+    Q_INVOKABLE bool remove();
+    Q_INVOKABLE bool combinations();
 
     Q_INVOKABLE int myRows();
     Q_INVOKABLE int myColumns();
