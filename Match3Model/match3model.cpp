@@ -164,6 +164,8 @@ QSet<int> Match3model::combinations(){
                 if(m_board.value(i).m_color == m_board.value(i + myRows()).m_color &&
                         m_board.value(i).m_color == m_board.value(i + myRows() * 2).m_color){
                     listIndex.insert(i);
+                    listIndex.insert(i + myRows());
+                    listIndex.insert(i + myRows() * 2);
                 }
             }
         }
@@ -176,18 +178,18 @@ bool Match3model::remove(){
     combinations();
 
     //для видалення горезонталі
-//    beginRemoveRows(QModelIndex(), *combinations().begin(), *combinations().begin() + 2);
-//    for(int i = *combinations().begin(); i < *combinations().end(); i++){
-//        m_board.removeAt(i);
-//    }
-//    endRemoveRows();
-
-    //для видалення вертикалі
-    beginRemoveRows(QModelIndex(), *combinations().begin(), *combinations().begin());
+    beginRemoveRows(QModelIndex(), *combinations().begin(), *combinations().begin() + 2);
     for(int i = *combinations().begin(); i < *combinations().end(); i++){
         m_board.removeAt(i);
     }
     endRemoveRows();
+
+    //для видалення вертикалі
+    foreach(int a, combinations()){
+        beginRemoveRows(QModelIndex(), a, a);
+        m_board.removeAt(a);
+        endRemoveRows();
+    }
 
     return true;
 }
