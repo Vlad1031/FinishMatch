@@ -143,23 +143,21 @@ bool Match3model::boardValid(){
 }
 
 //bool Match3model::gameOver(){
-//    bool m_gameOver = true;
 
-//    return m_gameOver;
 //}
 
 QSet<int> Match3model::combinations(){
     QSet<int> listIndex;
     for(int i = 0; i < m_board.size(); i++){
-
         if(m_board.value(i).m_index < m_board.size() - 2){
             if(i % myColumns() < myColumns() - 2){
                 if(m_board.value(i).m_color == m_board.value(i + 1).m_color &&
                         m_board.value(i).m_color == m_board.value(i + 2).m_color){
                     listIndex.insert(i);
+                    listIndex.insert(i + 1);
+                    listIndex.insert(i + 2);
                 }
             }
-
             if(i % myRows() < myRows() + 2){
                 if(m_board.value(i).m_color == m_board.value(i + myRows()).m_color &&
                         m_board.value(i).m_color == m_board.value(i + myRows() * 2).m_color){
@@ -175,24 +173,23 @@ QSet<int> Match3model::combinations(){
 }
 
 bool Match3model::remove(){
-    combinations();
+//    beginRemoveRows(QModelIndex(), *combinations().begin(), *combinations().begin() + 2);
+//    for(int i = *combinations().begin(); i < *combinations().end(); i++){
+//        m_board.removeAt(i);
+//    }
+//    endRemoveRows();
 
-    //для видалення горезонталі
-    beginRemoveRows(QModelIndex(), *combinations().begin(), *combinations().begin() + 2);
-    for(int i = *combinations().begin(); i < *combinations().end(); i++){
-        m_board.removeAt(i);
-    }
-    endRemoveRows();
-
-    //для видалення вертикалі
-    foreach(int a, combinations()){
-        beginRemoveRows(QModelIndex(), a, a);
-        m_board.removeAt(a);
+    foreach(int numbers, combinations()){
+        beginRemoveRows(QModelIndex(), numbers, numbers);
+        m_board.removeAt(numbers);
         endRemoveRows();
     }
-
     return true;
 }
+
+//void Match3model::waterfall(){
+
+//}
 
 int Match3model::rowCount(const QModelIndex &parent) const
 {

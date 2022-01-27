@@ -30,7 +30,6 @@ ApplicationWindow{
     ButtonRestart{
         onPressed: {
             rectColor = "#FF0000"
-//            gameOver.open()
             table.restartGrid.shaffle()
         }
         onReleased: { rectColor = "#ffff00" }
