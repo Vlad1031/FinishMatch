@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Match3model_t {
-    QByteArrayData data[12];
-    char stringdata0[99];
+    QByteArrayData data[13];
+    char stringdata0[105];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -38,17 +38,18 @@ QT_MOC_LITERAL(2, 24, 0), // ""
 QT_MOC_LITERAL(3, 25, 4), // "from"
 QT_MOC_LITERAL(4, 30, 2), // "to"
 QT_MOC_LITERAL(5, 33, 4), // "move"
-QT_MOC_LITERAL(6, 38, 6), // "remove"
-QT_MOC_LITERAL(7, 45, 12), // "combinations"
-QT_MOC_LITERAL(8, 58, 6), // "myRows"
-QT_MOC_LITERAL(9, 65, 9), // "myColumns"
-QT_MOC_LITERAL(10, 75, 8), // "myColors"
-QT_MOC_LITERAL(11, 84, 14) // "QList<QString>"
+QT_MOC_LITERAL(6, 38, 10), // "boardValid"
+QT_MOC_LITERAL(7, 49, 7), // "shaffle"
+QT_MOC_LITERAL(8, 57, 6), // "remove"
+QT_MOC_LITERAL(9, 64, 6), // "myRows"
+QT_MOC_LITERAL(10, 71, 9), // "myColumns"
+QT_MOC_LITERAL(11, 81, 8), // "myColors"
+QT_MOC_LITERAL(12, 90, 14) // "QList<QString>"
 
     },
     "Match3model\0neighboring\0\0from\0to\0move\0"
-    "remove\0combinations\0myRows\0myColumns\0"
-    "myColors\0QList<QString>"
+    "boardValid\0shaffle\0remove\0myRows\0"
+    "myColumns\0myColors\0QList<QString>"
 };
 #undef QT_MOC_LITERAL
 
@@ -58,7 +59,7 @@ static const uint qt_meta_data_Match3model[] = {
        8,       // revision
        0,       // classname
        0,    0, // classinfo
-       7,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -66,22 +67,24 @@ static const uint qt_meta_data_Match3model[] = {
        0,       // signalCount
 
  // methods: name, argc, parameters, tag, flags
-       1,    2,   49,    2, 0x02 /* Public */,
-       5,    2,   54,    2, 0x02 /* Public */,
-       6,    2,   59,    2, 0x02 /* Public */,
-       7,    0,   64,    2, 0x02 /* Public */,
-       8,    0,   65,    2, 0x02 /* Public */,
-       9,    0,   66,    2, 0x02 /* Public */,
-      10,    0,   67,    2, 0x02 /* Public */,
+       1,    2,   54,    2, 0x02 /* Public */,
+       5,    2,   59,    2, 0x02 /* Public */,
+       6,    0,   64,    2, 0x02 /* Public */,
+       7,    0,   65,    2, 0x02 /* Public */,
+       8,    0,   66,    2, 0x02 /* Public */,
+       9,    0,   67,    2, 0x02 /* Public */,
+      10,    0,   68,    2, 0x02 /* Public */,
+      11,    0,   69,    2, 0x02 /* Public */,
 
  // methods: parameters
     QMetaType::Bool, QMetaType::Int, QMetaType::Int,    3,    4,
     QMetaType::Void, QMetaType::Int, QMetaType::Int,    3,    4,
-    QMetaType::Bool, QMetaType::Int, QMetaType::Int,    3,    4,
+    QMetaType::Bool,
+    QMetaType::Void,
     QMetaType::Bool,
     QMetaType::Int,
     QMetaType::Int,
-    0x80000000 | 11,
+    0x80000000 | 12,
 
        0        // eod
 };
@@ -95,15 +98,16 @@ void Match3model::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         case 0: { bool _r = _t->neighboring((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 1: _t->move((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
-        case 2: { bool _r = _t->remove((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])));
+        case 2: { bool _r = _t->boardValid();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 3: { bool _r = _t->combinations();
+        case 3: _t->shaffle(); break;
+        case 4: { bool _r = _t->remove();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
-        case 4: { int _r = _t->myRows();
+        case 5: { int _r = _t->myRows();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 5: { int _r = _t->myColumns();
+        case 6: { int _r = _t->myColumns();
             if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
-        case 6: { QList<QString> _r = _t->myColors();
+        case 7: { QList<QString> _r = _t->myColors();
             if (_a[0]) *reinterpret_cast< QList<QString>*>(_a[0]) = std::move(_r); }  break;
         default: ;
         }
@@ -139,13 +143,13 @@ int Match3model::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 7)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 7;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 7)
+        if (_id < 8)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 7;
+        _id -= 8;
     }
     return _id;
 }

@@ -31,11 +31,12 @@ public:
     Q_INVOKABLE bool neighboring(int from, int to);
     Q_INVOKABLE void move(int from, int to);
 
-//    Q_INVOKABLE void boardValid();
+    Q_INVOKABLE bool boardValid();
+    Q_INVOKABLE void shaffle();
 //    Q_INVOKABLE bool gameOver();
 
-    Q_INVOKABLE bool remove(int from, int to);
-    Q_INVOKABLE bool combinations();
+    Q_INVOKABLE bool remove();
+    QSet<int> combinations();
 
     Q_INVOKABLE int myRows();
     Q_INVOKABLE int myColumns();

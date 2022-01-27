@@ -17,9 +17,20 @@ Match3model::Match3model(QObject *parent) : QAbstractListModel(parent)
         mb.m_color = QColor(myColors()[rand() % myColors().size()]);
         m_board.append(mb);
     }
+    shaffle();
 }
 
 Match3model::~Match3model() { }
+
+void Match3model::shaffle(){
+    auto seed = chrono::system_clock::now().time_since_epoch().count();
+    static mt19937 generator(seed);
+
+    do{
+        shuffle(m_board.begin(), m_board.end(), generator);
+        emit dataChanged(createIndex(0, 0), createIndex(myColumns() * myRows(), 0));
+    }while(!boardValid());
+}
 
 int Match3model::myRows(){
     QFile file;
@@ -124,9 +135,12 @@ void Match3model::move(int from, int to){
     }
 }
 
-//void Match3model::boardValid(){
-
-//}
+bool Match3model::boardValid(){
+    if(!combinations().empty()){
+        return false;
+    }
+    return true;
+}
 
 //bool Match3model::gameOver(){
 //    bool m_gameOver = true;
@@ -134,24 +148,43 @@ void Match3model::move(int from, int to){
 //    return m_gameOver;
 //}
 
-bool Match3model::combinations(){
+QSet<int> Match3model::combinations(){
+    QSet<int> listIndex;
     for(int i = 0; i < m_board.size(); i++){
-        if(m_board.value(i).m_color == m_board.value(i + 1).m_color){
-            if(m_board.value(i).m_color == m_board.value(i + 2).m_color){
-                return true;
+
+        if(m_board.value(i).m_index < m_board.size() - 2){
+            if(i % myColumns() < myColumns() - 2){
+                if(m_board.value(i).m_color == m_board.value(i + 1).m_color &&
+                        m_board.value(i).m_color == m_board.value(i + 2).m_color){
+                    listIndex.insert(i);
+                }
+            }
+
+            if(i % myRows() < myRows() + 2){
+                if(m_board.value(i).m_color == m_board.value(i + myRows()).m_color &&
+                        m_board.value(i).m_color == m_board.value(i + myRows() * 2).m_color){
+                    listIndex.insert(i);
+                }
             }
         }
     }
-    return false;
+    qDebug() << listIndex;
+    return listIndex;
 }
 
-bool Match3model::remove(int from, int to){
+bool Match3model::remove(){
+    combinations();
 
-    if(combinations() == false){
-        return "hhh";
-    }
-    beginRemoveRows(QModelIndex(), from, to);
-    for(int i = from; i < to; i++){
+    //для видалення горезонталі
+//    beginRemoveRows(QModelIndex(), *combinations().begin(), *combinations().begin() + 2);
+//    for(int i = *combinations().begin(); i < *combinations().end(); i++){
+//        m_board.removeAt(i);
+//    }
+//    endRemoveRows();
+
+    //для видалення вертикалі
+    beginRemoveRows(QModelIndex(), *combinations().begin(), *combinations().begin());
+    for(int i = *combinations().begin(); i < *combinations().end(); i++){
         m_board.removeAt(i);
     }
     endRemoveRows();

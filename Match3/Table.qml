@@ -7,10 +7,11 @@ GridView{
     cellWidth: width / root.model.myColumns()
     cellHeight: height / root.model.myRows()
 
-//    property int countMove: 0
-//    property int countScore: 0
+    property int countMove: 0
+    property int countScore: 0
     property int index_to: 0
     property variant nameColor: value
+    property alias restartGrid: match3model
 
     model: Match3model{
         id: match3model
@@ -41,7 +42,7 @@ GridView{
         states: [
             State{
                 name: "to"
-                PropertyChanges { target: spheres; scale: 0.8 }
+                PropertyChanges { target: spheres;/* scale: 0.8 */}
             }
         ]
 
@@ -60,10 +61,9 @@ GridView{
 
                 if(root.state == "from"){
                     root.model.move(index, index_to)
-                    if(nameColor != spheres.color)
-                        root.model.remove()
+                    root.model.remove()
                 }
-            }            
+            }
         }
     }
 

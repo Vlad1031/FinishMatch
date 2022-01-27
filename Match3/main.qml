@@ -30,7 +30,8 @@ ApplicationWindow{
     ButtonRestart{
         onPressed: {
             rectColor = "#FF0000"
-            gameOver.open()
+//            gameOver.open()
+            table.restartGrid.shaffle()
         }
         onReleased: { rectColor = "#ffff00" }
     }
@@ -71,5 +72,57 @@ ApplicationWindow{
 
     GameOver{
         id: gameOver
+
+        Button{
+            id: button_restart
+
+            background: Rectangle{
+                id: rect_restart
+                implicitWidth: 185
+                implicitHeight: 40
+                color: "#ffff00"
+                radius: 5
+                Text{
+                    anchors.centerIn: rect_restart
+                    text: "Restart"
+                    font.pointSize: 10
+                    font.bold: true
+                }
+            }
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+        }
+        MouseArea{
+            anchors.fill: button_restart
+            onClicked: {
+                table.restartGrid.shaffle()
+                gameOver.close()
+            }
+        }
+
+        Button{
+            id: button_close
+
+            background: Rectangle{
+                id: rect_close
+                implicitWidth: 185
+                implicitHeight: 40
+                color: "#ffff00"
+                radius: 5
+                Text{
+                    anchors.centerIn: rect_close
+                    text: "Close"
+                    font.pointSize: 10
+                    font.bold: true
+                }
+            }
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+        }
+
+        MouseArea{
+            anchors.fill: button_close
+            onClicked: Qt.quit()
+        }
     }
 }
