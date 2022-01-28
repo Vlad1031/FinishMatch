@@ -142,10 +142,6 @@ bool Match3model::boardValid(){
     return true;
 }
 
-//bool Match3model::gameOver(){
-
-//}
-
 QSet<int> Match3model::combinations(){
     QSet<int> listIndex;
     for(int i = 0; i < m_board.size(); i++){
@@ -173,11 +169,15 @@ QSet<int> Match3model::combinations(){
 }
 
 bool Match3model::remove(){
-//    beginRemoveRows(QModelIndex(), *combinations().begin(), *combinations().begin() + 2);
-//    for(int i = *combinations().begin(); i < *combinations().end(); i++){
-//        m_board.removeAt(i);
-//    }
-//    endRemoveRows();
+    //якщо не записало індекс в set
+        //виконуємо backmove автоматично
+
+    //якщо видаляються із першого рядка
+        //опускаємо рандомні (функція яка генерує рандомні делегати)
+        //randomDelegate
+
+    //якщо видаляємо в середині
+        //опускаємо всі поступово і рандомні
 
     foreach(int numbers, combinations()){
         beginRemoveRows(QModelIndex(), numbers, numbers);
@@ -187,9 +187,15 @@ bool Match3model::remove(){
     return true;
 }
 
-//void Match3model::waterfall(){
+//        beginMoveRows(QModelIndex(), numbers - myColumns(), numbers - myColumns(), QModelIndex(), numbers);
+//        m_board.move(numbers - myColumns(), numbers);
+//        endMoveRows();
 
-//}
+void Match3model::randomDelegate(){
+    mBoard mb;
+    mb.m_color = QColor(myColors()[rand() % combinations().count()]);
+    m_board.append(mb);
+}
 
 int Match3model::rowCount(const QModelIndex &parent) const
 {

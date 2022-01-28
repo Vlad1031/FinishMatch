@@ -33,12 +33,11 @@ public:
 
     Q_INVOKABLE bool boardValid(); //+
     Q_INVOKABLE void shaffle(); //+
-    Q_INVOKABLE bool gameOver(); //-
 
     Q_INVOKABLE bool remove(); //+-
     QSet<int> combinations(); //+
 
-    void waterfall();
+    void randomDelegate();
 
     Q_INVOKABLE int myRows(); //+
     Q_INVOKABLE int myColumns(); //+

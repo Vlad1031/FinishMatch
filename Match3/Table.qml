@@ -61,6 +61,15 @@ GridView{
 
                 if(root.state == "from"){
                     root.model.move(index, index_to)
+                    countMove++
+                    countScore = countScore + 3
+                    if(countMove === 5){
+                        gameOver.open()
+                        if(countMove >= 5){
+                            countMove = 0
+                            countScore = 0
+                        }
+                    }
                     root.model.remove()
                 }
             }
