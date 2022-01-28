@@ -28,20 +28,18 @@ public:
     virtual int rowCount(const QModelIndex &parent) const override;
     virtual QVariant data(const QModelIndex &index, int role) const override;
 
-    Q_INVOKABLE bool neighboring(int from, int to); //+
-    Q_INVOKABLE void move(int from, int to); //+
-
-    Q_INVOKABLE bool boardValid(); //+
-    Q_INVOKABLE void shaffle(); //+
-
-    Q_INVOKABLE bool remove(); //+-
-    QSet<int> combinations(); //+
+    Q_INVOKABLE bool neighboring(int from, int to);
+    Q_INVOKABLE void move(int from, int to);
+    Q_INVOKABLE bool boardValid();
+    Q_INVOKABLE void shaffle();
+    QSet<int> combinations();
+    Q_INVOKABLE bool remove();
 
     void randomDelegate();
 
-    Q_INVOKABLE int myRows(); //+
-    Q_INVOKABLE int myColumns(); //+
-    Q_INVOKABLE QList<QString> myColors(); //+
+    Q_INVOKABLE int myRows();
+    Q_INVOKABLE int myColumns();
+    Q_INVOKABLE QList<QString> myColors();
 
 private:
     struct mBoard{

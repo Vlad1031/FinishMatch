@@ -183,6 +183,17 @@ bool Match3model::remove(){
         beginRemoveRows(QModelIndex(), numbers, numbers);
         m_board.removeAt(numbers);
         endRemoveRows();
+
+//        if(numbers > 6){
+//            beginMoveRows(QModelIndex(), numbers - myColumns(), numbers - myColumns(), QModelIndex(), numbers);
+//            m_board.move(numbers - myColumns(), numbers);
+//            endMoveRows();
+//            randomDelegate();
+
+//        }
+//        else{
+//            randomDelegate();
+//        }
     }
     return true;
 }
