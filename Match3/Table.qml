@@ -42,7 +42,7 @@ GridView{
         states: [
             State{
                 name: "to"
-                PropertyChanges { target: spheres;/* scale: 0.8 */}
+                PropertyChanges { target: spheres; /*scale: 0.8*/}
             }
         ]
 
@@ -70,7 +70,7 @@ GridView{
                             countScore = 0
                         }
                     }
-                    root.model.remove()
+                    root.model.full_down()
                 }
             }
         }
@@ -83,7 +83,7 @@ GridView{
         id: transit
         NumberAnimation{
             properties: "x, y"
-            duration: 200
+            duration: 1000
         }
     }
 }

@@ -8,6 +8,7 @@
 #include <QVariant>
 #include <QFile>
 #include <QByteArray>
+#include <QTimer>
 using namespace std;
 
 class Match3model : public QAbstractListModel
@@ -33,9 +34,10 @@ public:
     Q_INVOKABLE bool boardValid();
     Q_INVOKABLE void shaffle();
     QSet<int> combinations();
+    Q_INVOKABLE bool full_down();
     Q_INVOKABLE bool remove();
 
-    void randomDelegate();
+//    void randomDelegate();
 
     Q_INVOKABLE int myRows();
     Q_INVOKABLE int myColumns();
@@ -46,6 +48,7 @@ private:
         int m_index;
         QColor m_color;
     };
+
     QList <mBoard> m_board;
     QHash<int, QByteArray> m_roleNames;
 };

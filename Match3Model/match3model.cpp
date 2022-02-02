@@ -11,6 +11,7 @@ Match3model::Match3model(QObject *parent) : QAbstractListModel(parent)
 {
     m_roleNames[ColorRole] = "color";
 
+
     for(int i = 0; i < myColumns() * myRows(); i++){
         mBoard mb;
         mb.m_index = i;
@@ -168,45 +169,31 @@ QSet<int> Match3model::combinations(){
     return listIndex;
 }
 
-bool Match3model::remove(){
-    //якщо не записало індекс в set
-        //виконуємо backmove автоматично
-
-    //якщо видаляються із першого рядка
-        //опускаємо рандомні (функція яка генерує рандомні делегати)
-        //randomDelegate
-
-    //якщо видаляємо в середині
-        //опускаємо всі поступово і рандомні
-
+bool Match3model::full_down(){
     foreach(int numbers, combinations()){
-        beginRemoveRows(QModelIndex(), numbers, numbers);
-        m_board.removeAt(numbers);
-        endRemoveRows();
-
-//        if(numbers > 6){
-//            beginMoveRows(QModelIndex(), numbers - myColumns(), numbers - myColumns(), QModelIndex(), numbers);
-//            m_board.move(numbers - myColumns(), numbers);
-//            endMoveRows();
-//            randomDelegate();
-
-//        }
-//        else{
-//            randomDelegate();
-//        }
+//        beginRemoveRows(QModelIndex(), numbers, numbers);
+//        m_board.removeAt(numbers);
+//        endRemoveRows();
+        for(int i = numbers; i > myColumns() - 1; i -= myColumns()){
+            beginMoveRows(QModelIndex(), i, i, QModelIndex(), i - myColumns());
+            endMoveRows();
+            beginMoveRows(QModelIndex(), i - myColumns() + 1, i - myColumns() + 1, QModelIndex(), i + 1);
+            endMoveRows();
+            m_board.move(i - myColumns() + 1, i + 1);
+        }
     }
     return true;
 }
 
-//        beginMoveRows(QModelIndex(), numbers - myColumns(), numbers - myColumns(), QModelIndex(), numbers);
-//        m_board.move(numbers - myColumns(), numbers);
-//        endMoveRows();
+//bool Match3model::remove(){
 
-void Match3model::randomDelegate(){
-    mBoard mb;
-    mb.m_color = QColor(myColors()[rand() % combinations().count()]);
-    m_board.append(mb);
-}
+//}
+
+//void Match3model::randomDelegate(){
+//    mBoard mb;
+//    mb.m_color = QColor(myColors()[rand() % combinations().count()]);
+//    m_board.append(mb);
+//}
 
 int Match3model::rowCount(const QModelIndex &parent) const
 {
