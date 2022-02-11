@@ -32,6 +32,8 @@ ApplicationWindow{
             rectColor = "#FF0000"
 //            gameOver.open()
             table.restartGrid.shaffle()
+            table.countMove = 0
+            table.countScore = 0
         }
         onReleased: { rectColor = "#ffff00" }
     }
@@ -97,6 +99,8 @@ ApplicationWindow{
             onClicked: {
                 table.restartGrid.shaffle()
                 gameOver.close()
+                table.countMove = 0
+                table.countScore = 0
             }
         }
 

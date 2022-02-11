@@ -11,11 +11,9 @@ Match3model::Match3model(QObject *parent) : QAbstractListModel(parent)
 {
     m_roleNames[ColorRole] = "color";
 
-
     for(int i = 0; i < myColumns() * myRows(); i++){
         mBoard mb;
-        mb.m_index = i;
-        mb.m_color = QColor(myColors()[rand() % myColors().size()]);
+        mb.m_color = myColors()[rand() % myColors().size()];
         m_board.append(mb);
     }
     shaffle();
@@ -30,7 +28,7 @@ void Match3model::shaffle(){
     do{
         shuffle(m_board.begin(), m_board.end(), generator);
         emit dataChanged(createIndex(0, 0), createIndex(myColumns() * myRows(), 0));
-    }while(!boardValid());
+    }while(!removeIndex.isEmpty());
 }
 
 int Match3model::myRows(){
@@ -136,64 +134,57 @@ void Match3model::move(int from, int to){
     }
 }
 
-bool Match3model::boardValid(){
-    if(!combinations().empty()){
-        return false;
-    }
-    return true;
-}
-
-QSet<int> Match3model::combinations(){
-    QSet<int> listIndex;
-    for(int i = 0; i < m_board.size(); i++){
-        if(m_board.value(i).m_index < m_board.size() - 2){
-            if(i % myColumns() < myColumns() - 2){
-                if(m_board.value(i).m_color == m_board.value(i + 1).m_color &&
-                        m_board.value(i).m_color == m_board.value(i + 2).m_color){
-                    listIndex.insert(i);
-                    listIndex.insert(i + 1);
-                    listIndex.insert(i + 2);
-                }
-            }
-            if(i % myRows() < myRows() + 2){
-                if(m_board.value(i).m_color == m_board.value(i + myRows()).m_color &&
-                        m_board.value(i).m_color == m_board.value(i + myRows() * 2).m_color){
-                    listIndex.insert(i);
-                    listIndex.insert(i + myRows());
-                    listIndex.insert(i + myRows() * 2);
+bool Match3model::combinations(){
+    for(int i = 0; i < myRows(); i++){
+        for(int j = 0; j < myColumns() - 2; j++){
+            if(m_board.at(j + 2 + myColumns() * i).m_color == m_board.at(j + myColumns() * i).m_color &&
+                    m_board.at(j + myColumns() * i).m_color == m_board.at(j + 1 + myColumns() * i).m_color){
+                for(int k = 0; k < 3; k++){
+                    if(find(removeIndex.begin(), removeIndex.end(), j + k + myColumns() * i) == removeIndex.end()){
+                        removeIndex.push_back(j + k + myColumns() * i);
+                    }
                 }
             }
         }
     }
-    qDebug() << listIndex;
-    return listIndex;
+
+    for(int i = 0; i < myColumns(); i++){
+        for(int j = 0; j < myRows() - 2; j++){
+            if(m_board.at(myColumns() * (j + 2) + i).m_color == m_board.at(myColumns() * j + i).m_color &&
+                    m_board.at(myColumns() * j + i).m_color == m_board.at(myColumns() * (j + 1) + i).m_color){
+                for(int k = 0; k < 3; k++){
+                    if(find(removeIndex.begin(), removeIndex.end(), myColumns() * (j + k) + i) == removeIndex.end()){
+                        removeIndex.push_back(myColumns() * (j + k) + i);
+                    }
+                }
+            }
+        }
+    }
+    qDebug() << removeIndex;
+    return !removeIndex.empty();
 }
 
-bool Match3model::full_down(){
-    foreach(int numbers, combinations()){
-//        beginRemoveRows(QModelIndex(), numbers, numbers);
-//        m_board.removeAt(numbers);
-//        endRemoveRows();
-        for(int i = numbers; i > myColumns() - 1; i -= myColumns()){
+void Match3model::drop_match(){
+    while(!removeIndex.isEmpty()){
+        beginRemoveRows(QModelIndex(), removeIndex[0], removeIndex[0]);
+        m_board.removeAt(removeIndex[0]);
+        endRemoveRows();
+
+        beginInsertRows(QModelIndex(), removeIndex[0], removeIndex[0]);
+        m_board.insert(removeIndex[0], mBoard(myColors()[rand() % myColors().size()]));
+        endInsertRows();
+
+        for(int i = removeIndex[0]; i > myColumns() - 1; i -= myColumns()){
             beginMoveRows(QModelIndex(), i, i, QModelIndex(), i - myColumns());
             endMoveRows();
             beginMoveRows(QModelIndex(), i - myColumns() + 1, i - myColumns() + 1, QModelIndex(), i + 1);
             endMoveRows();
             m_board.move(i - myColumns() + 1, i + 1);
         }
+
+        removeIndex.pop_front();
     }
-    return true;
 }
-
-//bool Match3model::remove(){
-
-//}
-
-//void Match3model::randomDelegate(){
-//    mBoard mb;
-//    mb.m_color = QColor(myColors()[rand() % combinations().count()]);
-//    m_board.append(mb);
-//}
 
 int Match3model::rowCount(const QModelIndex &parent) const
 {

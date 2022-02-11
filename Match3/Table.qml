@@ -10,7 +10,7 @@ GridView{
     property int countMove: 0
     property int countScore: 0
     property int index_to: 0
-    property variant nameColor: value
+    property variant nameColor
     property alias restartGrid: match3model
 
     model: Match3model{
@@ -42,7 +42,7 @@ GridView{
         states: [
             State{
                 name: "to"
-                PropertyChanges { target: spheres; /*scale: 0.8*/}
+                PropertyChanges { target: spheres }
             }
         ]
 
@@ -61,16 +61,15 @@ GridView{
 
                 if(root.state == "from"){
                     root.model.move(index, index_to)
-                    countMove++
-                    countScore = countScore + 3
-                    if(countMove === 5){
-                        gameOver.open()
-                        if(countMove >= 5){
-                            countMove = 0
-                            countScore = 0
+                    if(root.model.combinations()){
+                        root.model.drop_match()
+                        if(countScore > 20){
+                            gameOver.open()
+                        }
+                        else{
+                            root.model.drop_match()
                         }
                     }
-                    root.model.full_down()
                 }
             }
         }
@@ -78,12 +77,47 @@ GridView{
 
     move: transit
     displaced: transit
-
     Transition {
         id: transit
         NumberAnimation{
             properties: "x, y"
-            duration: 1000
+            duration: 400
+        }
+        onRunningChanged: {
+            if(!running){
+                if(root.model.combinations()){
+                    root.model.drop_match()
+                    if(countScore > 20){
+                        gameOver.open()
+                    }
+                    else{
+                        root.model.drop_match()
+                    }
+                }
+            }
+        }
+    }
+
+    add: newSphers
+    Transition {
+        id: newSphers
+        NumberAnimation{
+            properties: "y"
+            duration: 400
+            from: -100
+        }
+        onRunningChanged: {
+            if(!running){
+                if(root.model.combinations()){
+                    root.model.drop_match()
+                    if(countScore > 20){
+                        gameOver.open()
+                    }
+                    else{
+                        root.model.drop_match()
+                    }
+                }
+            }
         }
     }
 }

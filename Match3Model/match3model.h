@@ -31,13 +31,13 @@ public:
 
     Q_INVOKABLE bool neighboring(int from, int to);
     Q_INVOKABLE void move(int from, int to);
-    Q_INVOKABLE bool boardValid();
     Q_INVOKABLE void shaffle();
-    QSet<int> combinations();
-    Q_INVOKABLE bool full_down();
-    Q_INVOKABLE bool remove();
+    Q_INVOKABLE bool combinations();
+    Q_INVOKABLE void remove();
+    Q_INVOKABLE void drop_match();
 
-//    void randomDelegate();
+//    Q_INVOKABLE bool possible_combinations(int index_1, int index_2, int index_3);
+//    Q_INVOKABLE bool gameOver();
 
     Q_INVOKABLE int myRows();
     Q_INVOKABLE int myColumns();
@@ -45,11 +45,14 @@ public:
 
 private:
     struct mBoard{
-        int m_index;
-        QColor m_color;
+        mBoard(){}
+        mBoard(QString color) : m_color(color){}
+
+        QString m_color;
     };
 
     QList <mBoard> m_board;
+    QVector<int> removeIndex;
     QHash<int, QByteArray> m_roleNames;
 };
 
