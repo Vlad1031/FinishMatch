@@ -63,12 +63,14 @@ GridView{
                     root.model.move(index, index_to)
                     if(root.model.combinations()){
                         root.model.drop_match()
-                        if(countScore > 20){
+                        if(countMove >= 4 || root.model.gameOver()){
                             gameOver.open()
                         }
                         else{
                             root.model.drop_match()
+                            countMove++
                         }
+                        countScore = root.model.score()
                     }
                 }
             }

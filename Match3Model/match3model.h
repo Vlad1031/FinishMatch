@@ -35,9 +35,9 @@ public:
     Q_INVOKABLE bool combinations();
     Q_INVOKABLE void remove();
     Q_INVOKABLE void drop_match();
+    Q_INVOKABLE int score();
 
-//    Q_INVOKABLE bool possible_combinations(int index_1, int index_2, int index_3);
-//    Q_INVOKABLE bool gameOver();
+    Q_INVOKABLE bool gameOver();
 
     Q_INVOKABLE int myRows();
     Q_INVOKABLE int myColumns();
@@ -51,6 +51,7 @@ private:
         QString m_color;
     };
 
+    int scoreCount = 0;
     QList <mBoard> m_board;
     QVector<int> removeIndex;
     QHash<int, QByteArray> m_roleNames;

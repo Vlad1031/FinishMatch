@@ -22,8 +22,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Match3model_t {
-    QByteArrayData data[19];
-    char stringdata0[173];
+    QByteArrayData data[16];
+    char stringdata0[133];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -42,21 +42,17 @@ QT_MOC_LITERAL(6, 38, 7), // "shaffle"
 QT_MOC_LITERAL(7, 46, 12), // "combinations"
 QT_MOC_LITERAL(8, 59, 6), // "remove"
 QT_MOC_LITERAL(9, 66, 10), // "drop_match"
-QT_MOC_LITERAL(10, 77, 21), // "possible_combinations"
-QT_MOC_LITERAL(11, 99, 7), // "index_1"
-QT_MOC_LITERAL(12, 107, 7), // "index_2"
-QT_MOC_LITERAL(13, 115, 7), // "index_3"
-QT_MOC_LITERAL(14, 123, 8), // "gameOver"
-QT_MOC_LITERAL(15, 132, 6), // "myRows"
-QT_MOC_LITERAL(16, 139, 9), // "myColumns"
-QT_MOC_LITERAL(17, 149, 8), // "myColors"
-QT_MOC_LITERAL(18, 158, 14) // "QList<QString>"
+QT_MOC_LITERAL(10, 77, 5), // "score"
+QT_MOC_LITERAL(11, 83, 8), // "gameOver"
+QT_MOC_LITERAL(12, 92, 6), // "myRows"
+QT_MOC_LITERAL(13, 99, 9), // "myColumns"
+QT_MOC_LITERAL(14, 109, 8), // "myColors"
+QT_MOC_LITERAL(15, 118, 14) // "QList<QString>"
 
     },
     "Match3model\0neighboring\0\0from\0to\0move\0"
     "shaffle\0combinations\0remove\0drop_match\0"
-    "possible_combinations\0index_1\0index_2\0"
-    "index_3\0gameOver\0myRows\0myColumns\0"
+    "score\0gameOver\0myRows\0myColumns\0"
     "myColors\0QList<QString>"
 };
 #undef QT_MOC_LITERAL
@@ -81,11 +77,11 @@ static const uint qt_meta_data_Match3model[] = {
        7,    0,   80,    2, 0x02 /* Public */,
        8,    0,   81,    2, 0x02 /* Public */,
        9,    0,   82,    2, 0x02 /* Public */,
-      10,    3,   83,    2, 0x02 /* Public */,
-      14,    0,   90,    2, 0x02 /* Public */,
-      15,    0,   91,    2, 0x02 /* Public */,
-      16,    0,   92,    2, 0x02 /* Public */,
-      17,    0,   93,    2, 0x02 /* Public */,
+      10,    0,   83,    2, 0x02 /* Public */,
+      11,    0,   84,    2, 0x02 /* Public */,
+      12,    0,   85,    2, 0x02 /* Public */,
+      13,    0,   86,    2, 0x02 /* Public */,
+      14,    0,   87,    2, 0x02 /* Public */,
 
  // methods: parameters
     QMetaType::Bool, QMetaType::Int, QMetaType::Int,    3,    4,
@@ -94,11 +90,11 @@ static const uint qt_meta_data_Match3model[] = {
     QMetaType::Bool,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Bool, QMetaType::Int, QMetaType::Int, QMetaType::Int,   11,   12,   13,
+    QMetaType::Int,
     QMetaType::Bool,
     QMetaType::Int,
     QMetaType::Int,
-    0x80000000 | 18,
+    0x80000000 | 15,
 
        0        // eod
 };
@@ -117,8 +113,8 @@ void Match3model::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 4: _t->remove(); break;
         case 5: _t->drop_match(); break;
-        case 6: { bool _r = _t->possible_combinations((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2])),(*reinterpret_cast< int(*)>(_a[3])));
-            if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
+        case 6: { int _r = _t->score();
+            if (_a[0]) *reinterpret_cast< int*>(_a[0]) = std::move(_r); }  break;
         case 7: { bool _r = _t->gameOver();
             if (_a[0]) *reinterpret_cast< bool*>(_a[0]) = std::move(_r); }  break;
         case 8: { int _r = _t->myRows();

@@ -30,7 +30,6 @@ ApplicationWindow{
     ButtonRestart{
         onPressed: {
             rectColor = "#FF0000"
-//            gameOver.open()
             table.restartGrid.shaffle()
             table.countMove = 0
             table.countScore = 0

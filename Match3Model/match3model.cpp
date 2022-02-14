@@ -164,7 +164,14 @@ bool Match3model::combinations(){
     return !removeIndex.empty();
 }
 
+int Match3model::score(){
+    scoreCount += removeIndex.size();
+    qDebug() << "score =" << scoreCount;
+    return scoreCount;
+}
+
 void Match3model::drop_match(){
+    score();
     while(!removeIndex.isEmpty()){
         beginRemoveRows(QModelIndex(), removeIndex[0], removeIndex[0]);
         m_board.removeAt(removeIndex[0]);
@@ -174,17 +181,128 @@ void Match3model::drop_match(){
         m_board.insert(removeIndex[0], mBoard(myColors()[rand() % myColors().size()]));
         endInsertRows();
 
-        for(int i = removeIndex[0]; i > myColumns() - 1; i -= myColumns()){
-            beginMoveRows(QModelIndex(), i, i, QModelIndex(), i - myColumns());
-            endMoveRows();
-            beginMoveRows(QModelIndex(), i - myColumns() + 1, i - myColumns() + 1, QModelIndex(), i + 1);
-            endMoveRows();
-            m_board.move(i - myColumns() + 1, i + 1);
+        for(int i = 0; i < removeIndex[0] / myColumns(); i++){
+            move(removeIndex[0] - i * myColumns(), removeIndex[0] - (i + 1) * myColumns());
         }
 
         removeIndex.pop_front();
     }
 }
+
+bool Match3model::gameOver(){
+    for(int i = 0; i < myRows(); i++){
+        for(int j = 0; j < myColumns(); j++){
+
+            if(i > 1){
+                if(myColumns() - j > 1 &&
+                        m_board.at(i * myColumns() + j).m_color == m_board.at((i - 1) * myColumns() + j).m_color &&
+                        m_board.at((i - 1) * myColumns() + j).m_color == m_board.at((i - 2) * myColumns() + j + 1).m_color){
+                    return false;
+                }
+
+                if(j > 0 &&
+                        m_board.at(i * myColumns() + j).m_color == m_board.at((i - 1) * myColumns() + j).m_color &&
+                        m_board.at((i - 1) * myColumns() + j).m_color == m_board.at((i - 2) * myColumns() + j - 1).m_color){
+                    return false;
+                }
+
+                if(i > 2 &&
+                        m_board.at(i * myColumns() + j).m_color == m_board.at((i - 1) * myColumns() + j).m_color &&
+                        m_board.at((i - 1) * myColumns() + j).m_color == m_board.at((i - 3) * myColumns() + j).m_color){
+                    return false;
+                }
+            }
+
+            if(myRows() - i > 2){
+                if(myColumns() - j > 1 &&
+                        m_board.at(i * myColumns() + j).m_color == m_board.at((i + 1) * myColumns() + j).m_color &&
+                        m_board.at((i + 1) * myColumns() + j).m_color == m_board.at((i + 2) * myColumns() + j + 1).m_color){
+                    return false;
+                }
+
+                if(myColumns() - j > 1 &&
+                        m_board.at(i * myColumns() + j).m_color == m_board.at((i + 1) * myColumns() + j + 1).m_color &&
+                        m_board.at((i + 1) * myColumns() + j + 1).m_color == m_board.at((i + 2) * myColumns()).m_color){
+                    return false;
+                }
+
+                if(myRows() - i > 3 &&
+                        m_board.at(i * myColumns() + j).m_color == m_board.at((i + 1) * myColumns() + j).m_color &&
+                        m_board.at((i + 1) * myColumns() + j).m_color == m_board.at((i + 3) * myColumns() + j).m_color){
+                    return false;
+                }
+
+                if(j > 0 &&
+                        m_board.at(i * myColumns() + j).m_color == m_board.at((i + 2) * myColumns() + j).m_color &&
+                        m_board.at((i + 2) * myColumns() + j).m_color == m_board.at((i + 1) * myColumns() + j + 1).m_color){
+                    return false;
+                }
+
+                if(j > 0 &&
+                        m_board.at(i * myColumns() + j).m_color == m_board.at((i + 1) * myColumns() + j).m_color &&
+                        m_board.at((i + 1) * myColumns() + j).m_color == m_board.at((i + 2) * myColumns() + j - 1).m_color){
+                    return false;
+                }
+            }
+
+
+            if(j > 1){
+                if(myRows() - i > 1 &&
+                        m_board.at(i * myColumns() + j).m_color == m_board.at(i * myColumns() + j - 1).m_color &&
+                        m_board.at(i * myColumns() + j - 1).m_color == m_board.at((i + 1) * myColumns() + j - 2).m_color){
+                    return false;
+                }
+
+                if(i > 0 &&
+                        m_board.at(i * myColumns() + j).m_color == m_board.at(i * myColumns() + j - 1).m_color &&
+                        m_board.at(i * myColumns() + j - 1).m_color == m_board.at((i - 1) * myColumns() + j - 2).m_color){
+                    return false;
+                }
+
+                if(j > 2 &&
+                        m_board.at(i * myColumns() + j).m_color == m_board.at(i * myColumns() + j - 1).m_color &&
+                        m_board.at(i * myColumns() + j - 1).m_color == m_board.at(i * myColumns() + j - 3).m_color){
+                    return false;
+                }
+            }
+
+            if(myColumns() - j > 2){
+                if(myRows() - i > 1 &&
+                        m_board.at(i * myColumns() + j).m_color == m_board.at(i * myColumns() + j + 2).m_color &&
+                        m_board.at(i * myColumns() + j + 2).m_color == m_board.at((i + 1) * myColumns() + j + 1).m_color){
+                    return false;
+                }
+
+                if(myRows() - i > 1 &&
+                        m_board.at(i * myColumns() + j).m_color == m_board.at(i * myColumns() + j + 1).m_color &&
+                        m_board.at(i * myColumns() + j + 1).m_color == m_board.at((i + 1) * myColumns() + j + 2).m_color){
+                    return false;
+                }
+
+                if(myColumns() - j > 3 &&
+                        m_board.at(i * myColumns() + j).m_color == m_board.at(i * myColumns() + j + 1).m_color &&
+                        m_board.at(i * myColumns() + j + 1).m_color == m_board.at(i * myColumns() + j + 3).m_color){
+                    return false;
+                }
+
+                if(i > 0 &&
+                        m_board.at(i * myColumns() + j).m_color == m_board.at(i * myColumns() + j + 2).m_color &&
+                        m_board.at(i * myColumns() + j + 2).m_color == m_board.at((i - 1) * myColumns() + j + 1).m_color){
+                    return false;
+                }
+
+                if(i > 0 &&
+                        m_board.at(i * myColumns() + j).m_color == m_board.at(i * myColumns() + j + 1).m_color &&
+                        m_board.at(i * myColumns() + j + 1).m_color == m_board.at((i - 1) * myColumns() + j + 2).m_color){
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}
+
+
 
 int Match3model::rowCount(const QModelIndex &parent) const
 {
