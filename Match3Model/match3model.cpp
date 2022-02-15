@@ -139,9 +139,9 @@ bool Match3model::combinations(){
         for(int j = 0; j < myColumns() - 2; j++){
             if(m_board.at(j + 2 + myColumns() * i).m_color == m_board.at(j + myColumns() * i).m_color &&
                     m_board.at(j + myColumns() * i).m_color == m_board.at(j + 1 + myColumns() * i).m_color){
-                for(int k = 0; k < 3; k++){
-                    if(find(removeIndex.begin(), removeIndex.end(), j + k + myColumns() * i) == removeIndex.end()){
-                        removeIndex.push_back(j + k + myColumns() * i);
+                for(int n = 0; n < 3; n++){
+                    if(find(removeIndex.begin(), removeIndex.end(), j + n + myColumns() * i) == removeIndex.end()){
+                        removeIndex.push_back(j + n + myColumns() * i);
                     }
                 }
             }
@@ -152,9 +152,9 @@ bool Match3model::combinations(){
         for(int j = 0; j < myRows() - 2; j++){
             if(m_board.at(myColumns() * (j + 2) + i).m_color == m_board.at(myColumns() * j + i).m_color &&
                     m_board.at(myColumns() * j + i).m_color == m_board.at(myColumns() * (j + 1) + i).m_color){
-                for(int k = 0; k < 3; k++){
-                    if(find(removeIndex.begin(), removeIndex.end(), myColumns() * (j + k) + i) == removeIndex.end()){
-                        removeIndex.push_back(myColumns() * (j + k) + i);
+                for(int n = 0; n < 3; n++){
+                    if(find(removeIndex.begin(), removeIndex.end(), myColumns() * (j + n) + i) == removeIndex.end()){
+                        removeIndex.push_back(myColumns() * (j + n) + i);
                     }
                 }
             }
@@ -301,8 +301,6 @@ bool Match3model::gameOver(){
     }
     return true;
 }
-
-
 
 int Match3model::rowCount(const QModelIndex &parent) const
 {

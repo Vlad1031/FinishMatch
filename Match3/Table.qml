@@ -69,6 +69,7 @@ GridView{
                         else{
                             root.model.drop_match()
                             countMove++
+                            console.log("move ", countMove)
                         }
                         countScore = root.model.score()
                     }

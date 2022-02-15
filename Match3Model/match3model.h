@@ -36,7 +36,6 @@ public:
     Q_INVOKABLE void remove();
     Q_INVOKABLE void drop_match();
     Q_INVOKABLE int score();
-
     Q_INVOKABLE bool gameOver();
 
     Q_INVOKABLE int myRows();
