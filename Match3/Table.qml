@@ -62,12 +62,12 @@ GridView{
                 if(root.state == "from"){
                     root.model.move(index, index_to)
                     if(root.model.combinations()){
-                        root.model.drop_match()
+                        root.model.remove()
                         if(countMove >= 4 || root.model.gameOver()){
                             gameOver.open()
                         }
                         else{
-                            root.model.drop_match()
+                            root.model.remove()
                             countMove++
                             console.log("move ", countMove)
                         }
@@ -89,12 +89,12 @@ GridView{
         onRunningChanged: {
             if(!running){
                 if(root.model.combinations()){
-                    root.model.drop_match()
+                    root.model.remove()
                     if(countScore > 20){
                         gameOver.open()
                     }
                     else{
-                        root.model.drop_match()
+                        root.model.remove()
                     }
                 }
             }
@@ -112,12 +112,12 @@ GridView{
         onRunningChanged: {
             if(!running){
                 if(root.model.combinations()){
-                    root.model.drop_match()
+                    root.model.remove()
                     if(countScore > 20){
                         gameOver.open()
                     }
                     else{
-                        root.model.drop_match()
+                        root.model.remove()
                     }
                 }
             }

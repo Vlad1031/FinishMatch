@@ -170,7 +170,7 @@ int Match3model::score(){
     return scoreCount;
 }
 
-void Match3model::drop_match(){
+void Match3model::remove(){
     score();
     while(!removeIndex.isEmpty()){
         beginRemoveRows(QModelIndex(), removeIndex[0], removeIndex[0]);
@@ -245,7 +245,6 @@ bool Match3model::gameOver(){
                 }
             }
 
-
             if(j > 1){
                 if(myRows() - i > 1 &&
                         m_board.at(i * myColumns() + j).m_color == m_board.at(i * myColumns() + j - 1).m_color &&
@@ -302,14 +301,12 @@ bool Match3model::gameOver(){
     return true;
 }
 
-int Match3model::rowCount(const QModelIndex &parent) const
-{
+int Match3model::rowCount(const QModelIndex &parent) const{
     Q_UNUSED(parent);
     return m_board.count();
 }
 
-QVariant Match3model::data(const QModelIndex &index, int role) const
-{
+QVariant Match3model::data(const QModelIndex &index, int role) const{
     if(index.row() < 0 || index.row() > m_board.count()){
         return QVariant();
     }
